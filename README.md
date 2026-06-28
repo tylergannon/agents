@@ -30,12 +30,16 @@ Current skill focus:
   preview verification, customer-feedback triage, and tech-debt scouting skills,
 - skill evaluation and agent-tooling research as repo-local maintainer workflows.
 
-## Skills
+## Install
 
-Install the published portable skills with the public skills CLI:
+Install all published skills globally for Codex, Claude Code, and OpenCode:
 
 ```sh
-vp dlx skills add tylergannon/agents -a codex --yes --all
+vp dlx skills add tylergannon/agents \
+  -g \
+  -a codex -a claude-code -a opencode \
+  --skill claude-codex-consensus customer-feedback-triage daily-docs-fold debt-finder dependency-upgrade-pr e2e-coverage-triage edit-attractor-pipelines preview-resend-verification proof-of-work session-worklog supabase-query svelte-component-factoring tech-debt-bounty write-prompts \
+  -y
 ```
 
 Plugin-aware hosts can consume the same published skill set through

@@ -92,8 +92,8 @@ The first skills to develop here are:
 
 - `npm test` validates package metadata, package contents, and documentation
   index checker behavior.
-- Public install path for supported systems:
-  `vp dlx skills add tylergannon/agents -a <agent> --yes --all`.
+- Public user-global install path for Codex, Claude Code, and OpenCode is
+  documented in `README.md` and `skills/README.md`.
 - Current reference submodules:
   - `submodules/caveman`
   - `submodules/superpowers`

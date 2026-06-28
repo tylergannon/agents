@@ -5,10 +5,14 @@ This directory is the source of published agent skills.
 This directory contains only published portable skills. Repo-local maintainer
 skills live in `../.agents/skills/`.
 
-Install these skills with the public `skills` CLI:
+Install all published skills globally for Codex, Claude Code, and OpenCode:
 
 ```sh
-vp dlx skills add tylergannon/agents -a codex --yes --all
+vp dlx skills add tylergannon/agents \
+  -g \
+  -a codex -a claude-code -a opencode \
+  --skill claude-codex-consensus customer-feedback-triage daily-docs-fold debt-finder dependency-upgrade-pr e2e-coverage-triage edit-attractor-pipelines preview-resend-verification proof-of-work session-worklog supabase-query svelte-component-factoring tech-debt-bounty write-prompts \
+  -y
 ```
 
 ## Skills
