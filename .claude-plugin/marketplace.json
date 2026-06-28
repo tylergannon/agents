@@ -1,0 +1,18 @@
+{
+  "name": "agents-dev",
+  "description": "Development marketplace for shared agents skills",
+  "owner": {
+    "name": "agents"
+  },
+  "plugins": [
+    {
+      "name": "agents",
+      "description": "Shared skills and tooling for reusable prompt, proof, dependency upgrade, consensus, docs, testing, and maintenance workflows.",
+      "version": "0.1.0",
+      "source": "./",
+      "author": {
+        "name": "agents"
+      }
+    }
+  ]
+}

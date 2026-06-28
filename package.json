@@ -1,0 +1,30 @@
+{
+  "name": "agents",
+  "version": "0.1.0",
+  "description": "Shared agent skills for reusable proof, docs, testing, prompt, and maintenance workflows.",
+  "license": "MIT",
+  "homepage": "https://github.com/tylergannon/agents",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylergannon/agents.git"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node scripts/validate-package.mjs && bash scripts/test-check-doc-indexes.sh"
+  },
+  "files": [
+    "skills/README.md",
+    "skills/*/SKILL.md",
+    "skills/*/references/**",
+    "skills/*/scripts/**",
+    "!skills/**/__pycache__/**",
+    "!skills/**/*.py[cod]",
+    ".codex-plugin/",
+    ".claude-plugin/",
+    "README.md",
+    "AGENTS.md",
+    "LICENSE"
+  ]
+}

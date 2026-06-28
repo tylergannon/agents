@@ -1,0 +1,15 @@
+[submodule "submodules/caveman"]
+	path = submodules/caveman
+	url = https://github.com/JuliusBrussee/caveman.git
+[submodule "submodules/superpowers"]
+	path = submodules/superpowers
+	url = https://github.com/obra/superpowers.git
+[submodule "submodules/gstack"]
+	path = submodules/gstack
+	url = https://github.com/garrytan/gstack.git
+[submodule "submodules/gbrain-evals"]
+	path = submodules/gbrain-evals
+	url = https://github.com/garrytan/gbrain-evals.git
+[submodule "submodules/compound-engineering-plugin"]
+	path = submodules/compound-engineering-plugin
+	url = https://github.com/EveryInc/compound-engineering-plugin.git

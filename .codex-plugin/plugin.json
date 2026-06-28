@@ -1,0 +1,42 @@
+{
+  "name": "agents",
+  "version": "0.1.0",
+  "description": "Shared agent skills for reusable proof, PR, docs, prompt, testing, and maintenance workflows.",
+  "author": {
+    "name": "agents"
+  },
+  "homepage": "https://github.com/tylergannon/agents",
+  "repository": "https://github.com/tylergannon/agents",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "agent-tooling",
+    "codex",
+    "shared-tools"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "agents",
+    "shortDescription": "Shared skills and tooling for Codex projects",
+    "longDescription": "agents provides reusable skills for prompt writing, proof-of-work, dependency upgrades, Attractor pipelines, cross-agent consensus, documentation maintenance, testing coverage triage, customer feedback triage, and maintenance scouting.",
+    "developerName": "agents",
+    "category": "Coding",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Use agents skills in this repository.",
+      "Improve this prompt using the agents prompt-writing skill.",
+      "Drive this PR through proof, auto-merge, and merge readiness.",
+      "Upgrade dependencies with preview/runtime proof.",
+      "Review this design with Claude Code / Codex consensus.",
+      "Fold recent worklogs and reviews into durable docs."
+    ],
+    "websiteURL": "https://github.com/tylergannon/agents",
+    "privacyPolicyURL": "https://github.com/tylergannon/agents/blob/main/README.md",
+    "termsOfServiceURL": "https://github.com/tylergannon/agents/blob/main/LICENSE",
+    "brandColor": "#2563EB",
+    "screenshots": []
+  }
+}

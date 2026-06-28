@@ -1,0 +1,16 @@
+{
+  "name": "agents",
+  "description": "Shared skills and tooling for reusable prompt, proof, dependency upgrade, consensus, docs, testing, and maintenance workflows.",
+  "version": "0.1.0",
+  "author": {
+    "name": "agents"
+  },
+  "homepage": "https://github.com/tylergannon/agents",
+  "repository": "https://github.com/tylergannon/agents",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "agent-tooling",
+    "shared-tools"
+  ]
+}
