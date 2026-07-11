@@ -1,0 +1,30 @@
+# These linters use their default configurations. Fix reported code rather than
+# weakening checks with config files, nolint directives, or disabled linters.
+
+pre-commit:
+  jobs:
+    - name: formatters
+      group:
+        parallel: true
+        jobs:
+          - name: goimports
+            glob: "*.go"
+            run: go tool goimports -w {staged_files}
+            stage_fixed: true
+
+          - name: go-modernize
+            glob: "*.go"
+            run: go tool modernize -fix ./...
+            stage_fixed: true
+
+    - name: linters
+      group:
+        parallel: true
+        jobs:
+          - name: golangci-lint
+            glob: "*.go"
+            run: golangci-lint run ./...
+
+    - name: go-test
+      glob: "*.go"
+      run: go test ./...

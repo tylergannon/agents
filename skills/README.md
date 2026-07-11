@@ -25,6 +25,7 @@ vp dlx skills add tylergannon/agents \
 - `e2e-coverage-triage` - route E2E scenarios to the right proof layer.
 - `edit-attractor-pipelines` - design, edit, and prove Attractor DOT workflows.
 - `preview-resend-verification` - verify preview auth emails through Resend.
+- `proof-uploader` - install and use the R2 proof-artifact uploader.
 - `proof-of-work` - prove application behavior through the running stack and own PR closeout.
 - `session-worklog` - maintain tracked worklogs under `ephemeral/worklog/`.
 - `supabase-query` - run narrow linked Supabase CLI reads from the current worktree.

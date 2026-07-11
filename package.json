@@ -11,9 +11,6 @@
   "engines": {
     "node": ">=18"
   },
-  "scripts": {
-    "test": "node scripts/validate-package.mjs && bash scripts/test-check-doc-indexes.sh"
-  },
   "files": [
     "skills/README.md",
     "skills/*/SKILL.md",

@@ -55,3 +55,22 @@ To inspect the published skill set locally:
 ```sh
 find skills -maxdepth 2 -name SKILL.md -print
 ```
+
+## Proof artifacts
+
+The Go proof CLI uploads temporary artifacts to an S3-compatible bucket,
+rewrites relative Markdown links, and removes old objects:
+
+```sh
+go run ./cmd/proof upload-file FILE...
+go run ./cmd/proof prepare-proof DOCUMENT OUTPUT_OR_-
+go run ./cmd/proof vacuum 2w
+```
+
+Configuration is read from `~/.proof-uploader/config.yaml`; `.env` and process
+environment variables override it. Follow
+[`docs/cloudflare-r2.md`](docs/cloudflare-r2.md) for setup and credential
+rotation.
+
+Public object URLs are returned by default. Set `download_mode: signed` to
+return native R2 presigned URLs valid for one week instead.

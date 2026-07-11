@@ -1,29 +1,37 @@
 ---
 name: proof-of-work
 description: >
-  Prove implementation work by demonstrating changed behavior in a full running
-  application stack, then publish the PR with evidence and auto-merge by
-  default. Use for application behavior changes before claiming work is done,
-  PR-ready, or merge-ready. Do not use for docs-only, policy-only, or
-  scripts/tooling-only changes.
+  Read while authoring coding tasks and during PR review or when asked to
+  reassess proof.  Explains this team's expected proof standard and how to
+  demonstrate changes completely.  Use for coding tasks, not docs updates.
 ---
 
 # Proof Of Work
 
-Unit tests, typechecks, linters, builds, and format checks are hygiene. They are
-closeout checks. They are useful after the behavior works, but they do not prove
-the software works and should not drive the implementation.
+Prove a feature by actually running the software through the feature being
+worked on. You must produce an artifact demonstrating that the proof was made.
+The specifics on the protocol and artifact will differ by project and stack. If
+the repo provides a `/repo-proof` skill, load it now.
+
+Proof means an unbiased, unconditional demonstration of the software actually
+accomplishing the new or fixed behavior.
+
+Unit tests and linters are required checks but they are not proof except when
+they explicitly exercise the whole application.
+
+## Scope / Applicability
 
 This skill applies when the application is being changed. For docs-only,
 policy-only, or scripts/tooling-only work, use targeted checks for those files;
 do not require full-stack app proof unless the change affects application
 behavior.
 
-Proof means a concrete demonstration that the full running application stack
-actually performs the feature or fix being shipped. Develop that proof path from
-the start of the task and use it as the main implementation loop.
-
 ## Proof Standard
+
+When creating a task writeup or github issue, include a "Proof" section.
+DO NOT include the obvious checks (unit tests, compile check, etc).
+
+
 
 Default proof is browser proof: run the app, exercise the changed behavior
 through the real UI in Chrome.app with computer use or Playwright, and capture
@@ -96,5 +104,3 @@ proof of the changed behavior.
 
 Report branch, worktree, PR, head SHA, proof evidence, hygiene checks,
 exact-head CI/preview state, auto-merge or merge state, and any blocker.
-
-source: agents
