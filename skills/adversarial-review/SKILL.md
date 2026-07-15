@@ -5,9 +5,12 @@ description: >
   Use while planning or after implementing a non-trivial feature or refactor.
 ---
 
-Use the `agent` CLI with a broad, goal-level prompt. Give it the issue,
-requirements, and relevant changes, but do not steer it toward your suspected
-file, pattern, or answer.
+This skill instructs the calling agent. Load it locally, then use the `agent`
+CLI with a broad, goal-level prompt. Do not send `/adversarial-review` or any
+other skill invocation to the reviewer.
+
+Give the reviewer the issue, requirements, and relevant changes, but do not
+steer it toward your suspected file, pattern, or answer.
 
 Write a prompt file in this shape:
 
@@ -27,4 +30,4 @@ Report at most five findings, keeping only the most severe:
 Classify each finding as critical, issue, or nitpick.
 ```
 
-Run it with `agent . --file PROMPT.md`.
+Run it with `agent <workdir> --file <prompt-file>`.
