@@ -35,7 +35,7 @@ Current skill focus:
 Install all published skills globally for Codex and Claude Code:
 
 ```sh
-npx -y skills add tylergannon/agents \
+npx -y skills add https://github.com/tylergannon/agents/tree/main/skills \
   --global \
   --agent codex claude-code \
   --skill '*' \
