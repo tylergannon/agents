@@ -14,6 +14,7 @@
   "files": [
     "skills/README.md",
     "skills/*/SKILL.md",
+    "skills/*/agents/**",
     "skills/*/references/**",
     "skills/*/scripts/**",
     "!skills/**/__pycache__/**",

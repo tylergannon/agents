@@ -1,22 +1,21 @@
 ---
 name: adversarial-review
 description: >
-  Ask an independent agent to find material flaws in a design or implementation.
-  Use while planning or after implementing a non-trivial feature or refactor.
+  Reviewer-side instructions for independently finding material flaws in a
+  design, implementation, or proof. Load inside the spawned reviewer session
+  when its launch prompt invokes `/adversarial-review`.
 ---
 
-This skill instructs the calling agent. Load it locally, then use the `agent`
-CLI with a broad, goal-level prompt. Do not send `/adversarial-review` or any
-other skill invocation to the reviewer.
+# Adversarial Review
 
-Give the reviewer the issue, requirements, and relevant changes, but do not
-steer it toward your suspected file, pattern, or answer.
+Perform the review yourself. Do not ask another agent to run this skill.
 
-Write a prompt file in this shape:
+Read the repository instructions, the named issue/specification/plan, the full
+relevant diff, surrounding code needed to understand it, and available proof.
+Remain read-only unless the launch prompt explicitly authorizes edits.
 
-```text
-Review the feature work on branch codex/issue-XYZ for real implementation
-failures. Read the issue and the changes.
+Review broadly against the actual goal. Do not limit the review to files,
+patterns, suspected defects, or an intended answer mentioned by the caller.
 
 Report at most five findings, keeping only the most severe:
 
@@ -27,7 +26,6 @@ Report at most five findings, keeping only the most severe:
 - critical antipattern: explain the concrete failure it creates;
 - race or crash condition: reproduce it or give a detailed causal explanation.
 
-Classify each finding as critical, issue, or nitpick.
-```
-
-Run it with `agent <workdir> --file <prompt-file>`.
+Classify each finding as critical, issue, or nitpick. Give concrete file/line
+evidence and impact. If no material findings remain, say so directly and report
+only genuine nitpicks.
