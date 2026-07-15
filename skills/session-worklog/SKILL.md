@@ -1,72 +1,45 @@
 ---
 name: session-worklog
 description: >
-  Maintain a tracked session worklog in a target repository for commands,
-  decisions, corrections, proof, doc lookups, and external resources. Use for
-  non-trivial repo work or when capturing material that daily docs jobs should
-  later mine.
+  Maintain a tracked session worklog for later use repairing skills, developing
+  new ones, and improving documentation.
 ---
 
-# Session Worklog
-
-Use this skill when work creates decisions, corrections, proof, source
-discoveries, review results, or operational rules that should not disappear into
-chat history.
+The work log exists in order to learn from the agent's experience so that the
+same lessons need not be learned repeatedly.
 
 ## Session Start
 
-For non-trivial repository work, start in a task worktree before creating the
-worklog or writing operating artifacts. If the target repo documents a worktree
-path convention, use it. Otherwise default to:
-
-```text
-.worktrees/<short-task>
-```
-
-The root checkout is an orientation surface for status, search, and branch
-selection. If the session is already in a task worktree, continue there. If a
-worktree cannot be created, record the blocker before making repo changes.
+start in a task worktree before creating the worklog or writing operating artifacts.
 
 ## Path
 
 Use the target repo's documented worklog path. If none exists, default to:
 
 ```text
-ephemeral/worklog/YYYYMMDDHHMM-<short-task>.md
+ephemeral/worklog/YYYYMMDDHHMM-<task-name>.md
 ```
 
-Use the user's timezone when known. Keep one worklog per coherent session or
-task, not one file per command.
-
-## Project Scratch
-
-Only start a project scratch directory when the user explicitly starts or names
-a project. Use the target repo's documented project-scratch path. If none
-exists, default to:
-
-```text
-ephemeral/projects/<project-slug>/
-```
-
-Use project scratch directories for artifacts gathered during a project: source
-captures, screenshots, generated packets, QA notes, design inputs, temporary
-fixtures, and handoff bundles. Before adding project artifacts, check the target
-repo's `AGENTS.md` or equivalent for the current project list and choose the
-matching project when one exists.
+Use local time. Keep one worklog per session.  Before creating a PR, rename the
+worklog to a short, correct, description of what was done.
 
 ## What To Record
 
-- user goals, constraints, corrections, and changed instructions,
-- worktree path, branch name, and project scratch path when applicable,
-- relevant commands and results,
-- files changed or intentionally left alone,
-- decisions, tradeoffs, and rejected alternatives,
-- proof commands, failures, blockers, and final status,
-- PR, branch, review, or consensus state,
-- material source discoveries,
+The main thing we want to find later is _what went wrongly_ and what lessons
+were learned, as well as highly repetitive actions that take up lots of time.
+
+- human has to correct the agent on misconception, wrong implementation, or wrong implementation shape, etc
+- human is frustrated by the agent needing too much guidance
+- human is frustrated by time taken
+- discovery that the instructions were unclear or ambiguous, and need to be corrected
+- issues with skills being written in confusing, incoherent, ambiguous, contradictory instructions
+- infrastructure problems that slow development or proof
+- notes when the user says to remember something or that some specific thing should be part of a skill etc.
+- summarize interactions with other agents e.g. consensus achieved, conflicts resolved
 - skill telemetry when a skill is useful, confusing, wrong, blocked, contradicted
   by higher-priority instructions, missing a needed resource, or corrected by
   the user.
+- difficulty finding needed information about this project
 
 Use structured lines when a later fold should mine the entry:
 
@@ -74,45 +47,22 @@ Use structured lines when a later fold should mine the entry:
 decision: <durable decision and source>
 correction: <user correction or rule change>
 rule_discovery: <new operating rule>
-doc_lookup: <doc/source consulted> -> <why it mattered>
 doc_bug: <stale or wrong doc> -> <needed repair>
 external_resource: <source> -> <lesson or candidate borrow>
-skill_use: <skill> source=<repo-or-local> -> <why it was used>
 skill_issue: <skill> source=<repo-or-local> severity=<critical|bug|design|nit> -> <what failed or confused the work>
-skill_fix_request: <skill> source=<repo-or-local> -> <smallest requested repair>
 ```
 
 ## Skill Telemetry
 
-Record `skill_issue` or `skill_fix_request` when:
-
-- the user says the agent is applying a skill incorrectly,
-- the skill is hard to read, over-specific, missing context, or model-limiting,
-- the skill asks for behavior that conflicts with higher-priority instructions,
-- the skill assumes files, tools, paths, permissions, or repo structure that are
-  not present,
-- the skill omits a proof step, bundled resource, review loop, or escalation
-  condition needed for the task,
-- the agent has to work around or reinterpret the skill to finish correctly,
-- a local installed copy of a shared skill is edited or appears stale.
-
-For shared skills, include their source marker when known. For skills from this
-repo,
-use `source=agents` so daily folds can route the request upstream.
+Record `skill_issue` when it becomes clear (usually via HITL feedback) that
+either the agent didn't know to load the skill, or did load the skill but was
+unable to finish the task correctly.
 
 ## Boundaries
 
-- Keep the target repo's raw-material directory tracked unless its policy says
-  otherwise.
-- Do not delete an active worklog.
-- Do not turn the worklog into polished documentation.
-- During daily docs fold, delete, truncate, or retain ingested material only
-  when the fold ledger records the disposition.
+- Do not add ephemeral to .gitignore.  All of these materials should be tracked and follow the repo.
+- Append worklog only.  Do not edit or polish the contents.
 
 ## Closeout
 
-Before final response on substantial work, update the worklog with proof run,
-remaining debt, branch/PR state, auto-merge or merge state when applicable, and
-any material decisions that were made.
-
-source: agents
+Do not add final entries after the PR is merged, or there will be orphaned changes.
