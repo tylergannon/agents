@@ -1,68 +1,47 @@
 ---
 name: session-worklog
 description: >
-  Maintain a tracked session worklog for later use repairing skills, developing
-  new ones, and improving documentation.
+  Capture actionable intelligence during non-trivial repository work:
+  corrections, friction, failures, ambiguous instructions, repeated waste, and
+  durable lessons that should change future agent behavior, skills, or docs.
 ---
 
-The work log exists in order to learn from the agent's experience so that the
-same lessons need not be learned repeatedly.
-
-## Session Start
-
-start in a task worktree before creating the worklog or writing operating artifacts.
+The worklog is not an activity transcript. Do not record routine commands,
+expected results, or uneventful success. Record information that should change
+how future work is done.
 
 ## Path
 
-Use the target repo's documented worklog path. If none exists, default to:
+Start the worklog in the task worktree. Use the repo's documented path or:
 
 ```text
 ephemeral/worklog/YYYYMMDDHHMM-<task-name>.md
 ```
 
-Use local time. Keep one worklog per session.  Before creating a PR, rename the
-worklog to a short, correct, description of what was done.
+Use local time and one worklog per session. Before creating a PR, rename it to a
+short, accurate description of the work.
 
 ## What To Record
 
-The main thing we want to find later is _what went wrongly_ and what lessons
-were learned, as well as highly repetitive actions that take up lots of time.
-
-- human has to correct the agent on misconception, wrong implementation, or wrong implementation shape, etc
-- human is frustrated by the agent needing too much guidance
-- human is frustrated by time taken
-- discovery that the instructions were unclear or ambiguous, and need to be corrected
-- issues with skills being written in confusing, incoherent, ambiguous, contradictory instructions
-- infrastructure problems that slow development or proof
-- notes when the user says to remember something or that some specific thing should be part of a skill etc.
-- summarize interactions with other agents e.g. consensus achieved, conflicts resolved
-- skill telemetry when a skill is useful, confusing, wrong, blocked, contradicted
-  by higher-priority instructions, missing a needed resource, or corrected by
-  the user.
-- difficulty finding needed information about this project
+- a user correction or important misconception;
+- a failed, slow, or repetitive approach and the lesson from it;
+- ambiguous, stale, missing, or contradictory instructions;
+- tooling or infrastructure friction worth repairing;
+- a material decision, discovery, or agent disagreement future work needs;
+- a requested memory, skill change, or documentation change.
 
 Use structured lines when a later fold should mine the entry:
 
 ```text
 decision: <durable decision and source>
 correction: <user correction or rule change>
-rule_discovery: <new operating rule>
+friction: <costly failure or repetition> -> <needed repair>
 doc_bug: <stale or wrong doc> -> <needed repair>
-external_resource: <source> -> <lesson or candidate borrow>
-skill_issue: <skill> source=<repo-or-local> severity=<critical|bug|design|nit> -> <what failed or confused the work>
+skill_issue: <skill> source=<source> severity=<critical|bug|design|nit> -> <problem>
 ```
-
-## Skill Telemetry
-
-Record `skill_issue` when it becomes clear (usually via HITL feedback) that
-either the agent didn't know to load the skill, or did load the skill but was
-unable to finish the task correctly.
 
 ## Boundaries
 
-- Do not add ephemeral to .gitignore.  All of these materials should be tracked and follow the repo.
-- Append worklog only.  Do not edit or polish the contents.
-
-## Closeout
-
-Do not add final entries after the PR is merged, or there will be orphaned changes.
+- Keep `ephemeral/` tracked; do not add it to `.gitignore`.
+- Append facts as they emerge. Do not polish the worklog into documentation.
+- Do not add entries after the PR merges.

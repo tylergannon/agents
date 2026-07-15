@@ -7,7 +7,7 @@
   "plugins": [
     {
       "name": "agents",
-      "description": "Shared skills and tooling for reusable prompt, proof, dependency upgrade, consensus, docs, testing, and maintenance workflows.",
+      "description": "Shared skills and tooling for reusable prompt, proof, adversarial review, consensus, docs, and testing workflows.",
       "version": "0.1.0",
       "source": "./",
       "author": {

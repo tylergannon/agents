@@ -22,12 +22,12 @@ Current skill focus:
 
 - prompt writing and editing,
 - Attractor pipeline design/edit/proof,
-- Claude Code / Codex consensus review loops,
-- proof-of-work and dependency-upgrade PR lifecycle ownership,
+- adversarial review and consensus loops,
+- proof-of-work and proof-artifact publishing,
 - document-maintenance skills for target repositories,
 - session worklogs and behavior proof,
 - reusable Svelte factoring, E2E coverage triage, Supabase query, Resend
-  preview verification, customer-feedback triage, and tech-debt scouting skills,
+  preview verification, and customer-feedback triage skills,
 - skill evaluation and agent-tooling research as repo-local maintainer workflows.
 
 ## Install

@@ -18,7 +18,7 @@
   "interface": {
     "displayName": "agents",
     "shortDescription": "Shared skills and tooling for Codex projects",
-    "longDescription": "agents provides reusable skills for prompt writing, proof-of-work, dependency upgrades, Attractor pipelines, cross-agent consensus, documentation maintenance, testing coverage triage, customer feedback triage, and maintenance scouting.",
+    "longDescription": "agents provides reusable skills for prompt writing, proof-of-work, Attractor pipelines, adversarial review and consensus, documentation maintenance, testing coverage triage, and customer feedback triage.",
     "developerName": "agents",
     "category": "Coding",
     "capabilities": [
@@ -29,8 +29,7 @@
       "Use agents skills in this repository.",
       "Improve this prompt using the agents prompt-writing skill.",
       "Drive this PR through proof, auto-merge, and merge readiness.",
-      "Upgrade dependencies with preview/runtime proof.",
-      "Review this design with Claude Code / Codex consensus.",
+      "Review this design through adversarial review and consensus.",
       "Fold recent worklogs and reviews into durable docs."
     ],
     "websiteURL": "https://github.com/tylergannon/agents",
