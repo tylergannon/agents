@@ -32,15 +32,17 @@ Current skill focus:
 
 ## Install
 
-Install all published skills globally for Codex, Claude Code, and OpenCode:
+Install all published skills globally for Codex and Claude Code:
 
 ```sh
-vp dlx skills add tylergannon/agents \
-  -g \
-  -a codex -a claude-code -a opencode \
-  -s '*' \
-  -y
+npx -y skills add tylergannon/agents \
+  --global \
+  --agent codex claude-code \
+  --skill '*' \
+  --yes
 ```
+
+The skills CLI uses symlinks by default. Do not pass `--copy`.
 
 Plugin-aware hosts can consume the same published skill set through
 `.codex-plugin/plugin.json` or `.claude-plugin/plugin.json`. Repo-local
