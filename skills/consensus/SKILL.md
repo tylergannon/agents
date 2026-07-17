@@ -8,6 +8,9 @@ description: >
 
 # Consensus
 
+The `agent` CLI selects the reviewer automatically. Never pass a model or agent
+name as a positional argument; `<workdir>` must immediately follow `agent`.
+
 1. Use `/request-adversarial-review` to start the review and retain the spawned
    reviewer's session ID and review-file path. Read the review artifact.
 2. Fix each legitimate material finding. Challenge an incorrect or overstated

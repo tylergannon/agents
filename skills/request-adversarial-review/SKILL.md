@@ -12,6 +12,9 @@ This skill is for the calling agent. The spawned reviewer owns the review
 method by loading `/adversarial-review`; do not reproduce that skill's rubric in
 the launch prompt.
 
+The `agent` CLI selects the reviewer automatically. Never pass a model or agent
+name as a positional argument; `<workdir>` must immediately follow `agent`.
+
 1. Identify the worktree and authoritative issue, specification, plan, or proof
    artifact the reviewer should read. Choose a new review path such as
    `ephemeral/reviews/YYYYMMDDHHMM-<task>-round-01.md`.
