@@ -1,8 +1,8 @@
 ---
 name: spec-writing
 description: >
-   Read any time working on spec documents.  Explains how to write a spec:
-   prose style, technical language, level of detail, with examples.
+   Write, revise, reconcile, or review detailed software specifications.
+   Explains prose style, technical language, level of detail, and notation.
 ---
 
 # Natural Language Software Specification
@@ -23,12 +23,12 @@ the following conceptual.
 * Exclusions (not-building) -- Considerations that are explicitly excluded from
   the design, and agents are advised/enjoined not to build them, to prevent
   over-engineering and undue complexity.
-* Central data types and algorithms, further described below. Pseudocode only.
-  STRICTLY FORBIDDEN to use a real programming language or to provide an
-  algorithm or function implementation that does not have the force of proof.
+* Central data types and algorithms, further described below. Use
+  language-neutral pseudocode except when specifying public syntax or wire
+  formats that must be shown exactly.
 * Seams, interfaces, contracts.  Use a combination of prose and pseudocode to
-  divide the project into components.  Each component defined MUST have an
-  explicit metaphor and/or design pattern behind it.
+  divide the project into components. Each component must have an explicit
+  responsibility, boundary, and contract.
 
 ## Scope
 
@@ -36,16 +36,35 @@ A nlspec is NOT a technical specification in the usual sense.  Rather than
 specifying EVERYTHING, it specifies only the essential structures, behaviors,
 and considerations needed for an agent to be able to build the described software.
 
-**Minimalism Requirement** -- Do not include details that can be clearly inferred
-from what is written.
+**Minimalism Requirement** -- Omit interchangeable implementation details.
+Include externally visible behavior, invariants, defaults, ordering rules, and
+boundary decisions that reasonable implementations could interpret differently.
 
 The seams should be described in enough detail that each component can be
-independently implemented and by separate agents, then
+independently implemented and integrated through its stated contracts.
+
+## Workflow
+
+1. Read the complete existing spec and its referenced specs. Identify the
+   authoritative source and whether the task is drafting, revising,
+   reconciling, or reviewing.
+2. Define the goals, exclusions, architecture, central types, contracts, and
+   observable definition of done. Where relevant, specify defaults,
+   precedence, lifecycle, failure, concurrency, persistence, and observability.
+3. Treat prose as the canonical contract. Use tables, grammars, state machines,
+   and pseudocode only when they remove ambiguity.
+4. Re-read the complete result. Check terminology and every repeated rule
+   across prose, tables, examples, appendices, related specs, and the definition
+   of done. Each acceptance claim must trace to specified behavior.
+5. Report changed decisions, unresolved questions, verification performed, and
+   remaining proof gaps.
 
 ## Technical Artifacts
 
-Do not use actual code.  Use pseudocode like the following instead.  Seek HITL
-approval if there is some construct that should be newly minted.
+Do not prescribe an implementation language. Use pseudocode like the following
+instead. Exact examples of a specified language, schema, or wire format are
+allowed. Seek HITL approval before adding a materially new public concept or
+contract.
 
 ### Record
 
@@ -78,7 +97,7 @@ ENUM SessionState:
 
 ### Interface
 
-Prefered way to define seams.  Should include type definitions for user-defined
+Preferred way to define seams.  Should include type definitions for user-defined
 types.
 
 ```
@@ -133,15 +152,9 @@ AWAITING_INPUT -> PROCESSING -- user provides answer
 
 ### Function
 
-A pseudo-code algorithm definition.  NOT an escape hatch for agents wanting
-to add more content to fluff up the spec.  Reviewers are instructed to
-scrutinize all `FUNCTION` definitions with an eye for removal or replacement
-with simple prose description.
-
-FORBIDDEN to add function definitions that are not chosen core aspects of the
-software.  Doubly forbidden to EVER provide a function that is not either
-OBVIOUSLY correct or proven elsewhere by tests.  Use pseudocode for known
-algorithms when the prose would be more verbose.
+A pseudocode algorithm definition. Use only for core behavior whose ordering,
+precedence, or edge cases would be ambiguous in prose. It defines required
+semantics, not a prescribed implementation.
 
 ```
 FUNCTION check_context_usage(session):
