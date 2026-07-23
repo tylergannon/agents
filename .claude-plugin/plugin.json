@@ -1,6 +1,6 @@
 {
   "name": "agents",
-  "description": "Shared skills and tooling for reusable prompt, proof, adversarial review, consensus, docs, and testing workflows.",
+  "description": "Shared skills and tooling for reusable productivity, prompt, proof, adversarial review, consensus, docs, and testing workflows.",
   "version": "0.1.0",
   "author": {
     "name": "agents"

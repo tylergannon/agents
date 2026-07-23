@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update Borrowed Skills"
+  short_description: "Refresh copied skills and their pinned provenance"
+  default_prompt: "Update this repository’s borrowed skills from upstream and keep the borrowed-skills manifest accurate."

@@ -1,7 +1,7 @@
 {
   "name": "agents",
   "version": "0.1.0",
-  "description": "Shared agent skills for reusable proof, PR, docs, prompt, testing, and maintenance workflows.",
+  "description": "Shared agent skills for reusable productivity, proof, PR, docs, prompt, testing, and maintenance workflows.",
   "author": {
     "name": "agents"
   },
@@ -18,7 +18,7 @@
   "interface": {
     "displayName": "agents",
     "shortDescription": "Shared skills and tooling for Codex projects",
-    "longDescription": "agents provides reusable skills for prompt writing, proof-of-work, Attractor pipelines, adversarial review and consensus, documentation maintenance, testing coverage triage, and customer feedback triage.",
+    "longDescription": "agents provides reusable skills for productivity, prompt writing, proof-of-work, Attractor pipelines, adversarial review and consensus, documentation maintenance, testing coverage triage, and customer feedback triage.",
     "developerName": "agents",
     "category": "Coding",
     "capabilities": [

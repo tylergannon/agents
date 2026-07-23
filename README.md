@@ -10,6 +10,7 @@ operational notes.
 ## Current Contents
 
 - `skills/` contains published portable agent skills.
+- `borrowed-skills.json` pins the provenance of copied upstream skills.
 - `.agents/skills/` contains repo-local maintainer skills that are
   not shipped to target repositories.
 - `ephemeral/` stores tracked operating material that daily docs jobs mine into
@@ -21,6 +22,7 @@ operational notes.
 Current skill focus:
 
 - prompt writing and editing,
+- productivity interviews, handoffs, teaching, and skill-writing guidance,
 - Attractor pipeline design/edit/proof,
 - adversarial review and consensus loops,
 - proof-of-work and proof-artifact publishing,
@@ -55,7 +57,7 @@ documented distribution path is the public skills CLI.
 To inspect the published skill set locally:
 
 ```sh
-find skills -maxdepth 2 -name SKILL.md -print
+find skills -name SKILL.md -print
 ```
 
 ## Proof artifacts
