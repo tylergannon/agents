@@ -37,11 +37,7 @@ Current skill focus:
 Install all published skills globally for Codex and Claude Code:
 
 ```sh
-npx -y skills add https://github.com/tylergannon/agents/tree/main/skills \
-  --global \
-  --agent codex claude-code \
-  --skill '*' \
-  --yes
+npx skills add tylergannon/agents --global --skill '*' --agent codex claude-code --yes
 ```
 
 The skills CLI uses symlinks by default. Do not pass `--copy`.
