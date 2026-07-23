@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "repository": "https://github.com/mattpocock/skills.git",
+      "commit": "ed37663cc5fbef691ddfecd080dff42f7e7e350d",
+      "localRoot": "skills/productivity",
+      "upstreamRoot": "skills/productivity",
+      "license": {
+        "spdx": "MIT",
+        "upstream": "LICENSE",
+        "local": "skills/productivity/LICENSE"
+      },
+      "skills": [
+        {
+          "local": "skills/productivity/grill-me",
+          "upstream": "skills/productivity/grill-me"
+        },
+        {
+          "local": "skills/productivity/grilling",
+          "upstream": "skills/productivity/grilling"
+        },
+        {
+          "local": "skills/productivity/handoff",
+          "upstream": "skills/productivity/handoff"
+        },
+        {
+          "local": "skills/productivity/teach",
+          "upstream": "skills/productivity/teach"
+        },
+        {
+          "local": "skills/productivity/writing-great-skills",
+          "upstream": "skills/productivity/writing-great-skills"
+        }
+      ]
+    }
+  ]
+}

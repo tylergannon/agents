@@ -6,6 +6,8 @@ description: >
   skills. Use when maintaining this repo's SKILL.md files, repo-local skills,
   distributed skills, plugin surfaces, or when the user asks whether skill
   instructions are word salad, overfit, unclear, duplicated, or inconsistent.
+metadata:
+  internal: true
 ---
 
 # Evaluate Skills

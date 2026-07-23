@@ -2,7 +2,14 @@
 
 - This repository publishes reusable agent skills and Go tools that support them.
 - `skills/` is the canonical source for published skills.
-- `.agents/skills/` contains maintainer-only skills and is not distributed.
+- `.agents/skills/` is the canonical source for repo-local maintainer skills;
+  they are internal to this repository and are not distributed.
+- Keep `.agents/skills/` canonical when exposing a repo-local skill to another
+  host; for example, use `.claude/skills/<name>` as a symlink.
+- Every repo-local `SKILL.md` must include this YAML frontmatter:
+  `metadata: { internal: true }`.
+- Track copied upstream skills in `borrowed-skills.json` and use the repo-local
+  `update-borrowed-skills` skill to refresh them.
 - Keep skills concise, project-portable, and free of product-specific policy.
 - Put a skill's scripts and references beside that skill.
 - Put shared Go commands in `cmd/` and reusable Go packages in `internal/` or `pkg/`.

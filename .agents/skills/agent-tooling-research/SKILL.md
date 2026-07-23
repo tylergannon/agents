@@ -4,6 +4,8 @@ description: >
   Study mounted agent-tooling reference repositories and turn them into concrete
   reusable agents patterns. Use when comparing Caveman, Superpowers, gstack,
   gbrain-evals, Compound Engineering, or when borrowing skill/plugin/eval ideas.
+metadata:
+  internal: true
 ---
 
 # Agent Tooling Research
