@@ -43,21 +43,35 @@ boundary decisions that reasonable implementations could interpret differently.
 The seams should be described in enough detail that each component can be
 independently implemented and integrated through its stated contracts.
 
-## Workflow
+## Prose vs Pseudocode
 
-1. Read the complete existing spec and its referenced specs. Identify the
-   authoritative source and whether the task is drafting, revising,
+Choose pseudocode for data type definitions and for algorithms
+
+## Workflows
+
+### Authoring New Specs
+
+1. Establish deep understanding of the needs and goals the project will serve.
+   Use the /grill-me skill to ask clarifying questions and ensure that your
+   picture is correct.  This is NOT the time to be asking fine details.  Your
+   focus is on ensuring that the goals and major concepts are understood and
+   captured clearly.  Things to establish include the project's scope, target
+   audience, and high-level objectives.
+2. Write down a draft of the first section of the spec.  Stop and engage in
+   discussion and collaborative editing session with HITL.  Continue after HITL
+   agrees on the draft.
+3. Establish the components / boundaries / seams that will be codified in the
+   spec.  Without actually defining the contract specifics, suggest a high-level
+   architecture and then collaborate with HITL to refine it.
+4. Continue collaboration to harden and specify the contracts for each seam,
+   beginning with external ones first.
+
+### Modifying An Existing Spec
+
+1. Read the complete existing spec and its referenced external documents.
+   Identify the authoritative source and whether the task is drafting, revising,
    reconciling, or reviewing.
-2. Define the goals, exclusions, architecture, central types, contracts, and
-   observable definition of done. Where relevant, specify defaults,
-   precedence, lifecycle, failure, concurrency, persistence, and observability.
-3. Treat prose as the canonical contract. Use tables, grammars, state machines,
-   and pseudocode only when they remove ambiguity.
-4. Re-read the complete result. Check terminology and every repeated rule
-   across prose, tables, examples, appendices, related specs, and the definition
-   of done. Each acceptance claim must trace to specified behavior.
-5. Report changed decisions, unresolved questions, verification performed, and
-   remaining proof gaps.
+2. Repeat back what you think the overall intent is for the revision.
 
 ## Technical Artifacts
 
