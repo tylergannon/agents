@@ -1,210 +1,92 @@
 ---
 name: spec-writing
 description: >
-   Write, revise, reconcile, or review detailed software specifications.
-   Explains prose style, technical language, level of detail, and notation.
+  The nlspec standard: what a Natural Language Spec is and must contain —
+  seams, cells, contracts, budgets, claims, exclusions, the artifact
+  hierarchy, and pseudocode notation. Load before reading, writing,
+  reviewing, or executing against an nlspec. For workflows use
+  spec-authoring, spec-review, slice-design, and cell-lifecycle.
 ---
 
-# Natural Language Software Specification
+# The nlspec Standard
 
-When asked for a spec you shall use the "nlspec" (Natural Language Spec) style,
-described here.
+An nlspec is a **minimally spanning** natural-language specification: a basis
+from which the whole software is constructible given the materials plus the
+rules of engagement. Spanning: every question a competent implementer could
+not settle alone is answered. Minimal: *only* those questions are answered;
+anything a capable reader can derive in context is elided.
 
-## Fundamentals
+**Membership test.** A decision belongs in the nlspec iff it is not derivable
+from what is already there. Detector: two capable readers would derive
+different answers, and the difference matters at a seam, claim, budget, or
+exclusion. If they would differ only in cell internals, leave it out.
 
-A nlspec is a minimally spanning document providing enough information for a
-frontier coding agent to build the described software.  At its heart it contains
-the following conceptual.
+## Required contents
 
-* Overview and Goals -- a high-level description of the software, the needs it
-  solves, and key design and esthetic principles.
-* Definition of done -- The list of behavioral claims that must be demonstrated
-  working, to accept the software as ready.
-* Exclusions (not-building) -- Considerations that are explicitly excluded from
-  the design, and agents are advised/enjoined not to build them, to prevent
-  over-engineering and undue complexity.
-* Central data types and algorithms, further described below. Use
-  language-neutral pseudocode except when specifying public syntax or wire
-  formats that must be shown exactly.
-* Seams, interfaces, contracts.  Use a combination of prose and pseudocode to
-  divide the project into components. Each component must have an explicit
-  responsibility, boundary, and contract.
+- **Overview and goals** — intent, needs served, key design principles.
+- **Definition of done** — behavioral claims that must be demonstrated
+  (these are proof claims in the /proof-of-work sense). Classify each as
+  *cell-local* (provable through one cell's contract) or *integration*
+  (provable only end-to-end). If most claims are integration-only, the
+  decomposition is suspect.
+- **Exclusions** — what is deliberately not built, to forestall
+  over-engineering.
+- **Central data types and algorithms** — language-neutral pseudocode per
+  [notation.md](notation.md); exact syntax only for public formats that must
+  be shown exactly.
+- **Seams, cells, contracts** — see below.
+- **Deferred decisions** — questions consciously left unanswered. A tripwire
+  list, not a dumping ground: an implementer who hits one escalates
+  immediately instead of improvising.
 
-## Scope
+## Seams, cells, budgets
 
-A nlspec is NOT a technical specification in the usual sense.  Rather than
-specifying EVERYTHING, it specifies only the essential structures, behaviors,
-and considerations needed for an agent to be able to build the described software.
+The seams partition the codebase into **cells**, each with an explicit
+responsibility, boundary, and contract. Everything inside a cell is
+**fungible**: if the contract holds and the claims are demonstrated, any
+implementation is acceptable.
 
-**Minimalism Requirement** -- Omit interchangeable implementation details.
-Include externally visible behavior, invariants, defaults, ordering rules, and
-boundary decisions that reasonable implementations could interpret differently.
+- **Seam placement (Parnas test):** a seam belongs where the reason to change
+  differs on either side. What changes together lives together.
+- **Budget:** every cell carries a maximum code volume, stated in the nlspec
+  and mechanically checkable. The budget is a **tripwire, not an implementer
+  rule**: on breach, stop and report — the spec decides where the split goes.
+  Keep budgets slightly tight; they are the primary drift tripwire (internal
+  degradation shows up as volume first).
+- **Seam integrity checks** (all mechanical): public surface matches contract;
+  nothing outside reaches past a contract; every cell under budget; routed
+  claims demonstrated.
 
-The seams should be described in enough detail that each component can be
-independently implemented and integrated through its stated contracts.
+## Authority and the two pumps
 
-## Prose vs Pseudocode
+The nlspec and the code are the only durable authorities: the nlspec holds
+intent, the code holds fact. Exactly two channels write to the nlspec:
 
-Choose pseudocode for data type definitions and for algorithms
+1. **Spec-defect escalation.** Implementers never amend the nlspec. On hitting
+   an underivable decision they stop and file a spec defect; the adjudicated
+   answer lands in the nlspec; work resumes.
+2. **Catalytic converter.** Test cases discovered in code may be elevated into
+   claims. Intake is behavioral evidence only — never opinions, rationale
+   prose, or "lessons."
 
-## Workflows
+## Artifact hierarchy
 
-### Authoring New Specs
+| Artifact | Role | Lifetime |
+|---|---|---|
+| nlspec | intent, claims, exclusions, seams, budgets | permanent, maintained, sole authority |
+| per-slice technical spec | derivable mechanics for one slice (signatures, call trees, file layout) | one slice, then archived in its PR; never maintained |
+| code + tests | fact; tests are candidate claims | permanent |
 
-1. Establish deep understanding of the needs and goals the project will serve.
-   Use the /grill-me skill to ask clarifying questions and ensure that your
-   picture is correct.  This is NOT the time to be asking fine details.  Your
-   focus is on ensuring that the goals and major concepts are understood and
-   captured clearly.  Things to establish include the project's scope, target
-   audience, and high-level objectives.
-2. Write down a draft of the first section of the spec.  Stop and engage in
-   discussion and collaborative editing session with HITL.  Continue after HITL
-   agrees on the draft.
-3. Establish the components / boundaries / seams that will be codified in the
-   spec.  Without actually defining the contract specifics, suggest a high-level
-   architecture and then collaborate with HITL to refine it.
-4. Continue collaboration to harden and specify the contracts for each seam,
-   beginning with external ones first.
+Routing test for any content: *how long must someone agree with this?*
+Forever-and-binding → nlspec. This slice → slice spec. In the code → do not
+write it down. The slice spec may only contain decisions whose lifetime is at
+most the slice; anything a future slice must agree with is seam-level and must
+be promoted to the nlspec before the slice ships.
 
-### Modifying An Existing Spec
+## Style
 
-1. Read the complete existing spec and its referenced external documents.
-   Identify the authoritative source and whether the task is drafting, revising,
-   reconciling, or reviewing.
-2. Repeat back what you think the overall intent is for the revision.
-
-## Technical Artifacts
-
-Do not prescribe an implementation language. Use pseudocode like the following
-instead. Exact examples of a specified language, schema, or wire format are
-allowed. Seek HITL approval before adding a materially new public concept or
-contract.
-
-### Record
-
-Describes a data type definition.
-
-```
-RECORD Session:
-    id                : String                  -- UUID, assigned at creation
-    provider_profile  : ProviderProfile         -- tools + system prompt for the active model
-    execution_env     : ExecutionEnvironment    -- where tools run
-    history           : List<Turn>              -- ordered conversation turns
-    event_emitter     : EventEmitter            -- delivers events to host application
-    config            : SessionConfig           -- limits, timeouts, settings
-    state             : SessionState            -- current lifecycle state
-    llm_client        : Client                  -- from the Unified LLM SDK
-    steering_queue    : Queue<String>           -- messages to inject between tool rounds
-    followup_queue    : Queue<String>           -- messages to process after current input completes
-    subagents         : Map<String, SubAgent>   -- active child agents
-```
-
-### Enum
-
-```
-ENUM SessionState:
-    IDLE              -- waiting for user input
-    PROCESSING        -- running the agentic loop
-    AWAITING_INPUT    -- model asked the user a question
-    CLOSED            -- session terminated (normal or error)
-```
-
-### Interface
-
-Preferred way to define seams.  Should include type definitions for user-defined
-types.
-
-```
-RECORD ToolDefinition:
-    name        : String            -- unique identifier
-    description : String            -- for the LLM
-    parameters  : Dict              -- JSON Schema (root must be "object")
-
-RECORD RegisteredTool:
-    definition  : ToolDefinition
-    executor    : Function          -- (arguments, execution_env) -> String
-
-RECORD ToolRegistry:
-    _tools      : Map<String, RegisteredTool>
-
-    register(tool)                  -- add or replace a tool
-    unregister(name)                -- remove a tool
-    get(name) -> RegisteredTool | None
-    definitions() -> List<ToolDefinition>
-    names() -> List<String>
-
-INTERFACE ProviderProfile:
-    id              : String            -- "openai", "anthropic", "gemini"
-    model           : String            -- model identifier (e.g., "gpt-5.2-codex")
-    tool_registry   : ToolRegistry      -- all tools available to this profile
-
-    FUNCTION build_system_prompt(environment, project_docs) -> String
-    FUNCTION tools() -> List<ToolDefinition>
-    FUNCTION provider_options() -> Map | None
-
-    -- Capability flags
-    supports_reasoning           : Boolean
-    supports_streaming           : Boolean
-    supports_parallel_tool_calls : Boolean
-    context_window_size          : Integer
-```
-
-### State Machine
-
-Coupled with a state enum, to define the allowed transitions.
-
-```
-IDLE -> PROCESSING          -- on submit()
-PROCESSING -> PROCESSING    -- tool loop continues
-PROCESSING -> AWAITING_INPUT -- model asks user a question (no tool calls, open-ended)
-PROCESSING -> IDLE          -- natural completion or turn limit
-PROCESSING -> CLOSED        -- unrecoverable error
-IDLE -> CLOSED              -- explicit close()
-any -> CLOSED               -- abort signal (after graceful shutdown cleanup)
-AWAITING_INPUT -> PROCESSING -- user provides answer
-```
-
-### Function
-
-A pseudocode algorithm definition. Use only for core behavior whose ordering,
-precedence, or edge cases would be ambiguous in prose. It defines required
-semantics, not a prescribed implementation.
-
-```
-FUNCTION check_context_usage(session):
-    approx_tokens = total_chars_in_history(session.history) / 4
-    threshold = session.provider_profile.context_window_size * 0.8
-    IF approx_tokens > threshold:
-        session.emit(WARNING, message = "Context usage at ~"
-            + ROUND(approx_tokens / session.provider_profile.context_window_size * 100)
-            + "% of context window")
-```
-
-### Service Definition
-
-This should be rare as well, only to be used when the algorithms being shown
-are non-obvious but simple and/or the prose description of the behavior
-would be more verbose.
-
-```
-HandlerRegistry:
-    handlers        : Map<String, Handler>   -- type string -> handler instance
-    default_handler : Handler                -- fallback handler (typically codergen)
-
-    FUNCTION register(type_string, handler):
-        handlers[type_string] = handler
-        -- Registering for an already-registered type replaces the previous handler
-
-    FUNCTION resolve(node) -> Handler:
-        -- 1. Explicit type attribute
-        IF node.type is not empty AND node.type IN handlers:
-            RETURN handlers[node.type]
-
-        -- 2. Shape-based resolution
-        handler_type = SHAPE_TO_TYPE[node.shape]
-        IF handler_type IN handlers:
-            RETURN handlers[handler_type]
-
-        -- 3. Default
-        RETURN default_handler
-```
+Prose is the canonical contract. Use pseudocode for data types and for
+algorithms whose ordering, precedence, or edge cases would be ambiguous in
+prose; it defines required semantics, not a prescribed implementation. Do not
+prescribe an implementation language. Seek HITL approval before adding a
+materially new public concept or contract.

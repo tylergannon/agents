@@ -18,3 +18,9 @@
 - Keep package and plugin metadata synchronized when published contents change.
 - Preserve licenses and attribution when adapting external work.
 - Keep optional sources for skill research in `SKILL_REPOSITORIES.md`; consult them only when useful.
+
+## Active projects
+
+- `ephemeral/projects/nlspec-methodology/` — nlspec methodology: seam-governed
+  spec-driven development and its skill suite (spec-writing, spec-authoring,
+  spec-review, slice-design, cell-lifecycle).
