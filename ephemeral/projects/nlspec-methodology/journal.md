@@ -182,3 +182,65 @@ single reasoned plan.
   proof-uploader conventions).
 - Whether `spec-review` should always invoke `/request-adversarial-review`
   for material specs or only on request.
+
+---
+
+## Addendum — Parnas side chat (2026-07-28)
+
+### Observations
+
+- "Are we being lazy?" cuts both ways. The escalation-triage heuristic named
+  only one failure mode; there are two, and they are mirror images:
+  - **Boundary erosion** — widen the interface because solving inside the
+    boundary is harder. Escapes inward work.
+  - **Boundary worship** — respect "the contract" more than good software:
+    reimplement on one side of a seam an algorithm that already exists on the
+    other, because touching the contract feels forbidden. Escapes escalation.
+- Both are the same act: avoiding the honest move (filing a spec defect).
+  Naming only one teaches the other.
+- Worship-duplication is rational for a weak model whenever escalation
+  carries a penalty-smell — you get the eleven-copies disease *with* pristine
+  contracts. Safety net: cross-seam duplication is volume, and volume is what
+  the budget tripwire measures — caught late but bounded, consistent with
+  replace economics.
+
+### Decisions (continuing the numbering)
+
+20. **Contracts are inviolable *unilaterally*, not absolutely.** Rigidity is
+    what makes escalation meaningful; escalation must therefore be explicitly
+    cheap and penalty-free in the handoff contract.
+
+21. **No generic seam-change decision procedure — anywhere in the suite.**
+    (User ruling.) How a seam should change depends on choices each
+    application makes — its metaphors and patterns — and cannot be
+    anticipated generically. A universal "mental program" for whether/how a
+    seam changes would be over-specified span, and false comfort: a checklist
+    a weak model can satisfy while doing the wrong thing. This is the
+    membership test applied to the methodology itself, and it fails —
+    correctly.
+
+22. **Declared metaphors are basis vectors.** If the application's metaphors
+    determine its change logic, they are part of the rules of engagement that
+    make span derivable — including seam-change judgment. The nlspec's
+    "design principles" bullet (Overview & Goals) is therefore load-bearing
+    required content, not vibes: the spec must declare its metaphors and
+    patterns. Seam-change questions are then adjudicated per application,
+    from the declared metaphors, at escalation time.
+
+### Landing spots (when building resumes)
+
+- `spec-writing` (standard): name both failure modes symmetrically; sharpen
+  "design principles" into declared-metaphors-as-basis.
+- `slice-design` (handoff contract): one line making escalation explicitly
+  penalty-free.
+- No skill gets a seam-change decision procedure.
+
+### Pending structural proposal (sketch approved for discussion, not built)
+
+spec-authoring to become a protocol (phase order, one phase ≈ one session,
+draft as sole state carrier, resume protocol, stopping rule) routing to
+phase skills: spec-goals (interview-shaped), spec-decomposition
+(design-shaped, change-reasons first), spec-contracts (notation-shaped,
+external-first), spec-claims (verification-shaped). Open: state carrier
+(in-draft status block vs. sidecar), rival decompositions (always vs.
+triggered), claims as phase vs. closing move of contracts.
