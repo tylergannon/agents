@@ -32,3 +32,12 @@ slice-design, cell-lifecycle.
 decision: the mechanical consistency pass dropped from the spec-writing draft
 was restored as its own skill (spec-review); it is the work models do reliably
 and humans do badly.
+
+correction: HITL hard-rejected TaskNodeBackend Checkpoint()/Restore() (attractor
+spec 4.5). Checkpointing is a workflow-engine concept only; harness sessions
+are natively durable (that is the premise of building on full harnesses), and
+the thread binding table should be write-through durable in the run directory
+at bind time, not snapshot/restored through an opaque blob in checkpoint.json.
+I defended the spec text instead of re-deriving — the exact "confident stale
+document as evidence" failure the methodology names. Re-derive before
+defending; the spec author is the authority, not the spec draft.
