@@ -244,3 +244,53 @@ phase skills: spec-goals (interview-shaped), spec-decomposition
 external-first), spec-claims (verification-shaped). Open: state carrier
 (in-draft status block vs. sidecar), rival decompositions (always vs.
 triggered), claims as phase vs. closing move of contracts.
+
+---
+
+## Addendum 2 — Attractor pivot (2026-07-28)
+
+Session goal revised (user): stop hand-designing authoring-process machinery;
+model the phased authoring procedure as an **attractor pipeline**
+(strongdm/attractor). Halfway point wanted this session: a notion of the
+final design. Then: author ONE spec (the revisions to the attractor spec —
+an attractor supporting a string of *interactive* sessions), build it, and
+use it to attack general spec authoring.
+
+Subagent digest of attractor-spec.md (full read), key findings:
+
+- **State model**: DOT digraph; node shape → handler type (box=codergen,
+  hexagon=wait.human, parallelogram=tool...); Context KV store mutated only
+  via Outcome.context_updates; checkpoint.json after every node
+  (current_node, completed_nodes, context_values); per-node
+  prompt.md/response.md/status.json; ArtifactStore for large outputs;
+  fidelity ladder (full/truncate/compact/summary:*) + thread_id for
+  cross-node LLM memory.
+- **Decision 23: state-carrier question dissolved.** Drafting state lives in
+  the engine (checkpoint + context), not in the draft and not in a
+  hand-designed sidecar. The draft nlspec is a pure workspace artifact.
+  Resume-after-compaction = checkpoint resume; re-entering a phase = an edge.
+- **Mapping**: each authoring phase = codergen node backed by an interactive
+  Claude session; human sign-offs = wait.human gates with edge-label choices
+  (incl. explicit "back to goals" rework edges); mechanical review = tool
+  node + codergen judge. Phase skills survive as per-node session
+  instructions; the spec-authoring "router" mostly becomes the graph.
+- **Interactive delta** (the build target): (a) a chat.session node type —
+  open-ended user↔agent loop with termination by phase-complete, not one
+  ask(); FREEFORM Question exists in the spec but no handler uses it;
+  (b) mid-node checkpointing — checkpoints are only written after node
+  completion, so a crash mid-conversation loses the session; needs
+  append-only turn log + resume-INTO-node semantics the resume algorithm
+  cannot currently express; (c) retry semantics — RETRY re-executes from
+  scratch; replaying a human conversation is nonsense → chat nodes need
+  max_retries=0 and resume-not-replay; (d) timeout must suspend, not FAIL,
+  when the human walks away.
+- **Steal**: status.json as outcome contract (interactive session ends by
+  writing it; no API coupling; PARTIAL_SUCCESS = "approved with caveats").
+  Fidelity ladder = our compaction policy formalized; design phases to never
+  require `full` fidelity across resume. **Avoid**: goal_gate auto-bounce
+  for human phases (disorienting); rework via visible wait.human edges;
+  reserve goal_gate for mechanical checks.
+- Open question 2 (rival decompositions: triggered, not mandatory) and 3
+  (claims as named phase; boundaries are permission to stop; fresh-context
+  subagent as derivability probe) — recommendations stated in-session, not
+  yet ratified by HITL.
