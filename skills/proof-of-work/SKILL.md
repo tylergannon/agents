@@ -24,6 +24,12 @@ In a task or issue, describe the observable claims the implementation must
 demonstrate. Do not provide a checklist of commands or list routine checks such
 as unit tests and compilation.
 
+In nlspec-governed work, claims arrive classified *cell-local* (demonstrated
+through one cell's contract) or *integration* (demonstrated end-to-end); see
+the spec-writing standard. Integration claims are demonstrated only through
+the running application; a cell-local claim may be demonstrated against a
+mock authenticated per slice-design.
+
 ## PR Evidence
 
 Lead with each claim and what demonstrated it. Put complete, concrete evidence

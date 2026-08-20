@@ -18,7 +18,11 @@ regeneration of specs, and no gap analysis for routine work.
 Ordinary contract-guarded agent work. The instruction shape is: "fix this; do
 not touch the contract; if the fix forces a contract re-evaluation, stop and
 report." The nlspec is a guardrail here, not a build input. The two-pump rule
-applies: maintenance never amends the nlspec directly.
+applies: maintenance never amends the nlspec directly. Maintenance does not
+waive the security carve-out: cells handling credentials, authentication or
+authorization decisions, irreversible or destructive operations, or data
+migrations are human-reviewed regardless of cell locality (see slice-design's
+review scope).
 
 ## Condemn triggers
 

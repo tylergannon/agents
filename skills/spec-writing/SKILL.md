@@ -28,7 +28,13 @@ exclusion. If they would differ only in cell internals, leave it out.
   (these are proof claims in the /proof-of-work sense). Classify each as
   *cell-local* (provable through one cell's contract) or *integration*
   (provable only end-to-end). If most claims are integration-only, the
-  decomposition is suspect.
+  decomposition is suspect. Every seam must be accounted for here: each
+  contract is exercised by at least one claim. Done means the application
+  actually runs and does its real work — live services, real secrets. An
+  authenticated mock (see slice-design) may stand in for cell-local claims
+  only; integration claims are demonstrated live, and every seam to an
+  external service carries at least one integration claim — a seam
+  demonstrated only against mocks never reaches done.
 - **Exclusions** — what is deliberately not built, to forestall
   over-engineering.
 - **Central data types and algorithms** — language-neutral pseudocode per
@@ -55,7 +61,9 @@ implementation is acceptable.
   degradation shows up as volume first).
 - **Seam integrity checks** (all mechanical): public surface matches contract;
   nothing outside reaches past a contract; every cell under budget; routed
-  claims demonstrated.
+  claims demonstrated. Per diff, the checks also report any public-surface
+  change and any new or removed cross-cell call site — the review-routing
+  signal consumed by slice-design.
 
 ## Authority and the two pumps
 
@@ -82,6 +90,24 @@ Forever-and-binding → nlspec. This slice → slice spec. In the code → do no
 write it down. The slice spec may only contain decisions whose lifetime is at
 most the slice; anything a future slice must agree with is seam-level and must
 be promoted to the nlspec before the slice ships.
+
+## Proportionality
+
+The apparatus scales with the blast radius of the change, not with habit:
+
+- **Cell-local change** — no seam, claim, budget, or exclusion touched:
+  maintenance mode per cell-lifecycle. No slice spec, no gap analysis; hand
+  the agent the contract guardrail and go.
+- **Single-cell feature** with claim impact: one slice with a minimal slice
+  spec — often just the call-stack tree and the claim it demonstrates.
+- **Cross-seam or multi-slice work**: full slice-design.
+- **No nlspec governs the code at all**: code merged to a maintained branch
+  gets one; prototypes, spikes, and scratch work do not. HITL decides
+  borderline cases — the implementing agent does not.
+
+Proportionality scales the slice apparatus only. Any change to a seam,
+contract, claim, budget, or exclusion reaches the nlspec only through the
+two pumps, with HITL, at every size.
 
 ## Style
 

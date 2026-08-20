@@ -19,7 +19,7 @@ output is an nlspec, reviewed with spec-review before use.
    section; iterate with HITL until they approve it.
 2. **Decomposition.** Propose the cells and seams without contract specifics.
    Apply the Parnas test to every proposed seam: does the reason to change
-   differ across it? Present the decomposition as a component list plus a
+   differ across it? Present the decomposition as a cell list plus a
    file-tree sketch; refine with HITL. Assign each cell a budget.
 3. **Contracts.** Harden contracts seam by seam, external seams first, using
    the notation standard. Get HITL approval for each materially new public

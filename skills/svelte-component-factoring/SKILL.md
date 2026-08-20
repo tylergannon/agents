@@ -36,7 +36,9 @@ Prefer components that own one product job end to end:
 Split a component when it has multiple independent reasons to change, such as
 uploading files, observing async status, rendering a catalog, owning modal
 state, or styling a repeated row. Do not split only to move markup while
-leaving state and remotes centralized in a route controller.
+leaving state and remotes centralized in a route controller. (The split rule
+is the Parnas test from the spec-writing standard; a component's props and
+emitted events are its contract surface.)
 
 Keep route pages thin. A route page may compose siblings, pass route data, set
 route-scoped context, and own route-only feature flags. It should not own
