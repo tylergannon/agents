@@ -8,30 +8,32 @@ description: >
 
 # Consensus
 
-The `agent` CLI selects the reviewer automatically. Never pass a model or agent
-name as a positional argument; `<workdir>` must immediately follow `agent`.
+Run each review through Gimbal's headless prompt runner in the target worktree.
+Give the reviewer the `/adversarial-review` skill and the complete current
+authoritative context. Each round is a new Gimbal prompt run with a fresh
+review artifact; do not invoke the separate `agent` executable.
 
-1. Use `/request-adversarial-review` to start the review and retain the spawned
-   reviewer's session ID and review-file path. Read the review artifact.
+1. Use `/request-adversarial-review` to start the review and retain the Gimbal
+   run ID and review-file path. Read the review artifact.
 2. Fix each legitimate material finding. Challenge an incorrect or overstated
-   finding with concrete evidence in the same reviewer session.
+   finding with concrete evidence in the next review prompt.
 3. After fixes, do not summarize earlier findings, fixes, resolved areas, or
    expected remaining problems. Do not add positive or negative subject-matter
-   limits, expected conclusions, or desired verdicts. Resume the same reviewer
-   with a minimal prompt.
+   limits, expected conclusions, or desired verdicts. Start a fresh Gimbal
+   prompt run with a minimal prompt and a new output path.
 
 Bad:
 ```text
-agent <workdir> --session <id> "/adversarial-review Re-check the fixes for
-X and Y. Do not broaden into Z. Write to <next-review-file>."
+gimbal run-prompt --workdir <workdir> "/adversarial-review Re-check the fixes
+for X and Y. Do not broaden into Z. Write to <next-review-file>."
 ```
 
 Good:
 ```text
-agent <workdir> --session <id> "/adversarial-review Re-review the entire current
-work against the same authoritative sources. Inspect the current implementation
-and proof. Write the complete review to <next-review-file>. Do not edit any
-other files."
+gimbal run-prompt --workdir <workdir> "/adversarial-review Re-review the entire
+current work against the same authoritative sources. Inspect the current
+implementation and proof. Write the complete review to <next-review-file>. Do
+not edit any other files."
 ```
 
 4. Use a new `ephemeral/reviews/...-round-NN.md` path for every round; never
@@ -41,8 +43,8 @@ other files."
 6. Read each artifact and stop when its outcome is `only nitpicks remain` or
    `no findings`.
 
-If the reviewer returns `invalid review request`, discard that session and
-restart with `/request-adversarial-review`; the rejected round cannot count as
+If the reviewer returns `invalid review request`, discard that run and restart
+with `/request-adversarial-review`; the rejected round cannot count as
 consensus.
 
 If evidence does not resolve a disputed finding after three exchanges, stop and

@@ -16,8 +16,10 @@ Implementation scope and review scope are different. An authoritative
 exclusion may constrain the solution, but the caller must not turn it into a
 limit on what the reviewer may consider.
 
-The `agent` CLI selects the reviewer automatically. Never pass a model or agent
-name as a positional argument; `<workdir>` must immediately follow `agent`.
+Launch the reviewer through Gimbal's headless prompt runner. Keep the reviewer
+in the target repository and give it the `/adversarial-review` skill plus the
+authoritative sources and output path in the prompt. Do not invoke the separate
+`agent` executable.
 
 1. Identify the worktree and authoritative issue, specification, plan, or proof
    artifact the reviewer should read. Choose a new review path such as
@@ -33,20 +35,21 @@ name as a positional argument; `<workdir>` must immediately follow `agent`.
 
 Bad:
 ```text
-agent <workdir> "/adversarial-review Review these artifacts. Do not broaden
-into routing. Re-check the expected failures below. Write to <review-file>."
+gimbal run-prompt --workdir <workdir> "/adversarial-review Review these
+artifacts. Do not broaden into routing. Re-check the expected failures below.
+Write to <review-file>."
 ```
 
 Good:
 ```text
-agent <workdir> "/adversarial-review Review the current implementation against
-the issue and repository instructions. Inspect the working tree and relevant
-surrounding code. Write the complete review to <review-file>. Do not edit any
-other files."
+gimbal run-prompt --workdir <workdir> "/adversarial-review Review the current
+implementation against the issue and repository instructions. Inspect the
+working tree and relevant surrounding code. Write the complete review to
+<review-file>. Do not edit any other files."
 ```
 
-Retain the reported session ID and review-file path. Read the artifact before
+Retain the Gimbal run ID and review-file path. Read the artifact before
 acting on findings. For a one-pass review, summarize and link the artifact. For
 repeated review and adjudication, continue with `/consensus`. An
-`invalid review request` outcome is not a review result; discard that session
+`invalid review request` outcome is not a review result; discard that run
 and relaunch with a clean prompt.
