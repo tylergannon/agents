@@ -19,7 +19,8 @@ limit on what the reviewer may consider.
 Launch the reviewer through Gimbal's headless prompt runner. Keep the reviewer
 in the target repository and give it the `/adversarial-review` skill plus the
 authoritative sources and output path in the prompt. Do not invoke the separate
-`agent` executable.
+`agent` executable. Without `--model`, Gimbal selects latest `sol` from Claude
+or latest `opus` from ChatGPT/Codex; outside those callers, supply a model.
 
 1. Identify the worktree and authoritative issue, specification, plan, or proof
    artifact the reviewer should read. Choose a new review path such as
@@ -48,8 +49,8 @@ working tree and relevant surrounding code. Write the complete review to
 <review-file>. Do not edit any other files."
 ```
 
-Retain the Gimbal run ID and review-file path. Read the artifact before
-acting on findings. For a one-pass review, summarize and link the artifact. For
+Retain the session ID printed in the final continuation footer and the
+review-file path. Read the artifact before acting on findings. For a one-pass review, summarize and link the artifact. For
 repeated review and adjudication, continue with `/consensus`. An
-`invalid review request` outcome is not a review result; discard that run
+`invalid review request` outcome is not a review result; discard that session
 and relaunch with a clean prompt.
